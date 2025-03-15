@@ -1,0 +1,42 @@
+# Disable directory browsing
+Options -Indexes
+
+# ----------------------------------------------------------------------
+# Rewrite engine
+# ----------------------------------------------------------------------
+
+# Mengaktifkan mod_rewrite
+<IfModule mod_rewrite.c>
+    Options +FollowSymlinks
+    RewriteEngine On
+
+    # Jika CodeIgniter di dalam subfolder, ubah RewriteBase sesuai dengan lokasi
+    RewriteBase /codeigniter/public/
+
+    # Redirect trailing slashes otomatis
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Redirect "www.example.com" ke "example.com"
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    RewriteRule ^ http://%1%{REQUEST_URI} [R=301,L]
+
+    # Jika bukan file atau folder yang ada, arahkan ke index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php/$1 [L,NC,QSA]
+
+    # Pastikan Authorization header diteruskan
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    # Jika mod_rewrite tidak tersedia, arahkan 404 ke index.php
+    ErrorDocument 404 /index.php
+</IfModule>
+
+# Nonaktifkan signature server untuk keamanan
+ServerSignature Off
