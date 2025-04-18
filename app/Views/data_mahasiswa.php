@@ -2,69 +2,53 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Mahasiswa</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #eef;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
         .container {
-            background: #ddd;
-            padding: 20px;
-            border-radius: 8px;
-            width: 500px;
-            text-align: center;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            width: 600px;
         }
         h2 {
             text-align: center;
+            margin-bottom: 20px;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
-            background: white;
+            background-color: #f9f9f9;
         }
         th, td {
-            border: 1px solid #aaa;
-            padding: 10px;
-            text-align: left;
+            padding: 12px;
+            border: 1px solid #ccc;
         }
         th {
-            background: #bbb;
+            background-color: #eee;
+            text-align: left;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2><strong>Data Mahasiswa</strong></h2>
+    <h2>Profil Mahasiswa</h2>
     <table>
-        <tr>
-            <th>NIM</th>
-            <td><?= esc($nim); ?></td>
-        </tr>
-        <tr>
-            <th>Nama</th>
-            <td><?= esc($nama); ?></td>
-        </tr>
-        <tr>
-            <th>Alamat</th>
-            <td><?= esc($alamat); ?></td>
-        </tr>
-        <tr>
-            <th>Bahasa Pemrograman</th>
-            <td><?= esc($bahasa); ?></td>
-        </tr>
-        <tr>
-            <th>Database</th>
-            <td><?= esc($database); ?></td>
-        </tr>
+        <tr><th>NIM</th><td><?= esc($mahasiswa['nim']) ?></td></tr>
+        <tr><th>Nama</th><td><?= esc($mahasiswa['nama']) ?></td></tr>
+        <tr><th>Alamat</th><td><?= esc($mahasiswa['alamat']) ?></td></tr>
+        <tr><th>Bahasa Pemrograman</th><td><?= esc($mahasiswa['bahasa']) ?></td></tr>
+        <tr><th>Database</th><td><?= esc($mahasiswa['database_penguasaan']) ?></td></tr>
+        <tr><th>Konsep Project</th><td><?= esc($mahasiswa['project_konsep']) ?></td></tr>
     </table>
 </div>
 

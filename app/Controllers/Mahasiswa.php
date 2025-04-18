@@ -2,20 +2,15 @@
 
 namespace App\Controllers;
 
+use App\Models\DataDiriModel;
 use CodeIgniter\Controller;
 
 class Mahasiswa extends Controller
 {
     public function index()
     {
-        // Data Hardcoded
-        $data = [
-            'nim' => '411222059',
-            'nama' => 'IRSYAD',
-            'alamat' => 'Limus Nunggal, Cileungsi',
-            'bahasa' => 'TS, Java, & Ruby',
-            'database' => 'MySQL & PostgreSQL',
-        ];
+        $model = new DataDiriModel();
+        $data['mahasiswa'] = $model->first();
 
         return view('data_mahasiswa', $data);
     }
