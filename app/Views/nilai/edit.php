@@ -1,3 +1,4 @@
+<?php $session = session(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,17 +42,27 @@
         .back-link:hover {
             text-decoration: underline;
         }
+        .error {
+            color: red;
+            margin-top: 10px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <h1>Edit Data Nilai</h1>
+
+    <?php if ($session->getFlashdata('error')): ?>
+        <div class="error"><?= $session->getFlashdata('error') ?></div>
+    <?php endif; ?>
+
     <form action="/nilai/update/<?= $nilai['no_id'] ?>" method="post">
-        <input type="text" name="nis" value="<?= $nilai['nis'] ?>" placeholder="NIS"><br>
-        <input type="text" name="nm_siswa" value="<?= $nilai['nm_siswa'] ?>" placeholder="Nama Siswa"><br>
-        <input type="number" name="absen" value="<?= $nilai['absen'] ?>" placeholder="Absen"><br>
-        <input type="number" name="uts" value="<?= $nilai['uts'] ?>" placeholder="UTS"><br>
-        <input type="number" name="tugas" value="<?= $nilai['tugas'] ?>" placeholder="Tugas"><br>
-        <input type="number" name="uas" value="<?= $nilai['uas'] ?>" placeholder="UAS"><br>
+        <input type="text" name="nis" value="<?= old('nis', $nilai['nis']) ?>" placeholder="NIS"><br>
+        <input type="text" name="nm_siswa" value="<?= old('nm_siswa', $nilai['nm_siswa']) ?>" placeholder="Nama Siswa"><br>
+        <input type="number" name="absen" value="<?= old('absen', $nilai['absen']) ?>" placeholder="Absen"><br>
+        <input type="number" name="uts" value="<?= old('uts', $nilai['uts']) ?>" placeholder="UTS"><br>
+        <input type="number" name="tugas" value="<?= old('tugas', $nilai['tugas']) ?>" placeholder="Tugas"><br>
+        <input type="number" name="uas" value="<?= old('uas', $nilai['uas']) ?>" placeholder="UAS"><br>
         <button type="submit">Perbarui</button>
     </form>
     <br>

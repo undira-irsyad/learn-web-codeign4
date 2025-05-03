@@ -1,3 +1,4 @@
+<?php $session = session(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,17 +33,27 @@
         button:hover {
             background: #0069d9;
         }
+        .error {
+            color: red;
+            margin-top: 10px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <h1>Tambah Data Nilai</h1>
+
+    <?php if ($session->getFlashdata('error')): ?>
+        <div class="error"><?= $session->getFlashdata('error') ?></div>
+    <?php endif; ?>
+
     <form action="/nilai/store" method="post">
-        <input type="text" name="nis" placeholder="NIS"><br>
-        <input type="text" name="nm_siswa" placeholder="Nama Siswa"><br>
-        <input type="number" name="absen" placeholder="Absen"><br>
-        <input type="number" name="uts" placeholder="UTS"><br>
-        <input type="number" name="tugas" placeholder="Tugas"><br>
-        <input type="number" name="uas" placeholder="UAS"><br>
+        <input type="text" name="nis" placeholder="NIS" value="<?= old('nis') ?>"><br>
+        <input type="text" name="nm_siswa" placeholder="Nama Siswa" value="<?= old('nm_siswa') ?>"><br>
+        <input type="number" name="absen" placeholder="Absen" value="<?= old('absen') ?>"><br>
+        <input type="number" name="uts" placeholder="UTS" value="<?= old('uts') ?>"><br>
+        <input type="number" name="tugas" placeholder="Tugas" value="<?= old('tugas') ?>"><br>
+        <input type="number" name="uas" placeholder="UAS" value="<?= old('uas') ?>"><br>
         <button type="submit">Simpan</button>
     </form>
 </body>

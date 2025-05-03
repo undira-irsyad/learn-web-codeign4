@@ -20,17 +20,27 @@ class Nilai extends BaseController
     public function store()
     {
         $model = new NilaiModel();
+        $session = session(); // get session instance
+
+        $nis = $this->request->getPost('nis');
         $absen = $this->request->getPost('absen');
         $uts = $this->request->getPost('uts');
         $tugas = $this->request->getPost('tugas');
         $uas = $this->request->getPost('uas');
+
+        // Check for existing NIS
+        $existing = $model->where('nis', $nis)->first();
+        if ($existing) {
+            $session->setFlashdata('error', 'NIS dengan nomor tersebut sudah terdaftar');
+            return redirect()->to('/nilai/create')->withInput();
+        }
 
         $nilai_akhir = ($absen + $uts + $tugas + $uas) / 4;
         $grade = $this->hitungGrade($nilai_akhir);
         $status = ($grade == 'D' || $grade == 'E') ? 'Mengulang' : 'Lulus';
 
         $model->save([
-            'nis' => $this->request->getPost('nis'),
+            'nis' => $nis,
             'nm_siswa' => $this->request->getPost('nm_siswa'),
             'absen' => $absen,
             'uts' => $uts,
@@ -54,17 +64,27 @@ class Nilai extends BaseController
     public function update($id)
     {
         $model = new NilaiModel();
+        $session = session();
+
+        $nis = $this->request->getPost('nis');
         $absen = $this->request->getPost('absen');
         $uts = $this->request->getPost('uts');
         $tugas = $this->request->getPost('tugas');
         $uas = $this->request->getPost('uas');
+
+        // Check if the new NIS is already used by another record
+        $existing = $model->where('nis', $nis)->where('no_id !=', $id)->first();
+        if ($existing) {
+            $session->setFlashdata('error', 'NIS dengan nomor tersebut sudah terdaftar');
+            return redirect()->to('/nilai/edit/' . $id)->withInput();
+        }
 
         $nilai_akhir = ($absen + $uts + $tugas + $uas) / 4;
         $grade = $this->hitungGrade($nilai_akhir);
         $status = ($grade == 'D' || $grade == 'E') ? 'Mengulang' : 'Lulus';
 
         $model->update($id, [
-            'nis' => $this->request->getPost('nis'),
+            'nis' => $nis,
             'nm_siswa' => $this->request->getPost('nm_siswa'),
             'absen' => $absen,
             'uts' => $uts,
@@ -77,6 +97,7 @@ class Nilai extends BaseController
 
         return redirect()->to('/nilai');
     }
+
 
     public function delete($id)
     {
