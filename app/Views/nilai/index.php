@@ -37,11 +37,23 @@
             color: white;
         }
         td a {
-            color: #007bff;
-            text-decoration: none;
+            color: white; /* Make text white */
         }
         td a:hover {
+            color: white; /* Ensure hover text is white */
             text-decoration: underline;
+        }
+        /* Specific style for the Edit and Hapus buttons */
+        td a[href*="edit"],
+        td a[href*="delete"] {
+            background-color: #28a745; /* Green background */
+            color: white; /* White text */
+            border: 1px solid #28a745;
+        }
+        td a[href*="edit"]:hover,
+        td a[href*="delete"]:hover {
+            background-color: #218838; /* Darker green on hover */
+            color: white; /* White text on hover */
         }
     </style>
 </head>
