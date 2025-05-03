@@ -1,0 +1,31 @@
+# Ignore application and system logs
+/application/cache/*
+/application/logs/*
+
+# Ignore user uploaded files
+/application/uploads/*
+
+# Ignore Composer and dependency folders
+/vendor/
+
+# Ignore system files
+/system/
+
+# Ignore environment-specific configuration files
+/.env
+
+# Ignore IDE files
+.idea/
+/.vscode/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore other sensitive or unnecessary files
+# /config/database.php
+# /config/config.php
+writable/
+
+# Ignore logs folder if present in root
+*.log
