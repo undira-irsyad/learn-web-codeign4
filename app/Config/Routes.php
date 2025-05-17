@@ -6,7 +6,6 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
-$routes->get('mahasiswa', 'Mahasiswa::index');
 $routes->get('nilai', 'Nilai::index');
 $routes->get('/nilai/create', 'Nilai::create');
 $routes->post('/nilai/store', 'Nilai::store');
