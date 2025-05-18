@@ -34,6 +34,22 @@
       .btn-space {
           margin-top: 10px;
       }
+    
+      .custom-green {
+          color: #198754; /* Bootstrap's green (same as btn-success) */
+      }
+
+      .btn-outline-custom-green {
+          border: 1px solid #198754;
+          color: #198754;
+          background-color: transparent;
+      }
+
+      .btn-outline-custom-green:hover {
+          background-color: #198754;
+          color: #fff;
+      }
+</style>
   </style>
 </head>
 <body>
@@ -82,22 +98,15 @@
             <div class="form-text">Minimal 6 karakter, mengandung huruf besar & simbol.</div>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-block">Simpan</button>
-        <a href="<?= base_url('post/login') ?>" class="btn btn-success btn-block btn-space">Login</a>
-
+        <button type="submit" class="btn btn-primary btn-block mb-3">Simpan</button>
+        <div class="form-text custom-green">Sudah memiliki akun?</div>
+        <a href="<?= base_url('post/login') ?>" class="btn btn-outline-custom-green btn-block">Login</a>
     </form>
   </div>
 </div>
 
-<footer class="footer mt-auto py-2 border-top" style="background-color: #f8f9fa; position: fixed; bottom: 0; width: 100%;">
-  <div class="container text-center">
-    <small>
-      Created By: 
-      <a href="http://localhost:8080/mahasiswa" class="text-decoration-none">Irsyad</a>
-    </small>
-  </div>
-</footer>
-
+<!-- footer -->
+<?= $this->include('layout/footer') ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

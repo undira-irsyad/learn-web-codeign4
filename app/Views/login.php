@@ -23,18 +23,13 @@
           <label>Password</label>
           <input type="password" name="password" class="form-control">
       </div>
-      <button type="submit" class="btn btn-primary w-100">Login</button>
-      <a href="<?= base_url('post/create') ?>" class="btn btn-success w-100 mt-2">Tambah Data Baru</a>
+      <button type="submit" class="btn btn-success w-100">Login</button>
+      <a href="<?= base_url('post/create') ?>" class="btn btn-primary w-100 mt-2">Tambah Data Baru</a>
+      <a href="<?= base_url('post/list') ?>" class="btn btn-primary w-100 mt-2">List User</a>
   </form>
 </div>
-<footer class="footer mt-auto py-2 border-top" style="background-color: #f8f9fa; position: fixed; bottom: 0; width: 100%;">
-  <div class="container text-center">
-    <small>
-      Created By: 
-      <a href="http://localhost:8080/mahasiswa" class="text-decoration-none">Irsyad</a>
-    </small>
-  </div>
-</footer>
+<!-- footer -->
+<?= $this->include('layout/footer') ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

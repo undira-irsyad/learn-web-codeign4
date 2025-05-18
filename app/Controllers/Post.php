@@ -64,7 +64,7 @@ class Post extends BaseController
                 'password'  => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT)
             ];
             $model->save($data);
-            return redirect()->to(base_url('post/create'))->with('success', 'Data berhasil disimpan!');
+            return redirect()->to(base_url('post/login'))->with('success', 'Data berhasil disimpan!');
         }
     }
 
@@ -82,6 +82,16 @@ class Post extends BaseController
         echo view('login');
     }
 
+    public function home()
+    {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to(base_url('post/login'));
+        }
+
+        $user = session()->get('user');
+        return view('home', ['user' => $user]);
+    }
+
     public function loginAuth()
     {
         helper(['form']);
@@ -96,7 +106,7 @@ class Post extends BaseController
             if (password_verify($password, $user['password'])) {
                 session()->set('isLoggedIn', true);
                 session()->set('user', $user);
-                return redirect()->to(base_url('post/profile'));
+                return redirect()->to(base_url('post/home'));
             } else {
                 return redirect()->to(base_url('post/login'))->with('error', 'Password salah!');
             }
@@ -110,10 +120,13 @@ class Post extends BaseController
         if (!session()->get('isLoggedIn')) {
             return redirect()->to(base_url('post/login'));
         }
-
+    
         $user = session()->get('user');
-        echo view('profile', ['user' => $user]);
-    }
+        return view('profile', [
+            'user' => $user,
+            'title' => 'Profile'
+        ]);
+    }    
 
     public function logout()
     {
