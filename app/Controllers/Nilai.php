@@ -2,15 +2,23 @@
 
 namespace App\Controllers;
 use App\Models\NilaiModel;
+use Dompdf\Dompdf;
 
 class Nilai extends BaseController
 {
+    protected $nilaiModel;
+
+    public function __construct()
+    {
+        $this->nilaiModel = new NilaiModel();
+    }
+
     public function index()
     {
-        $model = new NilaiModel();
-        $data['nilai'] = $model->findAll();
+        $data['nilai'] = $this->nilaiModel->findAll();
         return view('nilai/index', $data);
     }
+
 
     public function create()
     {
@@ -113,5 +121,28 @@ class Nilai extends BaseController
         if ($nilai >= 50) return 'C';
         if ($nilai >= 30) return 'D';
         return 'E';
+    }
+
+    public function exportPdf()
+    {
+        $data['nilai'] = $this->nilaiModel->findAll();
+
+        // Render HTML ke dalam view
+        $html = view('nilai/nilai_pdf', $data);
+
+        // Inisialisasi Dompdf
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+
+        // Atur ukuran dan orientasi halaman
+        $dompdf->setPaper('A4', 'landscape');
+
+        // Render PDF
+        $dompdf->render();
+
+        // Outputkan PDF ke browser
+        $dompdf->stream('laporan_nilai_siswa.pdf', [
+            "Attachment" => false // false = tampilkan di browser
+        ]);
     }
 }

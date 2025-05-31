@@ -59,7 +59,9 @@
 </head>
 <body>
     <h1>Daftar Nilai Siswa</h1>
-    <a href="/nilai/create">+ Tambah Data</a>
+    <a href="/nilai/create" style="background-color: #28a745;">+ Tambah Data</a>
+    <a href="/nilai/exportPdf" style="background-color: #dc3545; margin-left: 10px;">Export PDF</a>
+
     <table>
         <tr>
             <th>NIS</th><th>Nama</th><th>Absen</th><th>UTS</th><th>Tugas</th><th>UAS</th>
