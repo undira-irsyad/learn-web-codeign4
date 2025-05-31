@@ -1,6 +1,7 @@
 <!-- app/Views/profile.php -->
 <?= $this->extend('layout/sidebar') ?>
 <?= $this->section('content') ?>
+<title>Profile</title>
 <div class="container mt-5" style="max-width: 600px;">
   <h3 class="text-center mb-4">Profile</h3>
 

@@ -8,12 +8,22 @@ class Post extends BaseController
 {
     public function create()
     {
+        // Redirect logged-in users away from create page
+        if (session()->get('isLoggedIn')) {
+            return redirect()->to(base_url('post/home'));
+        }
+
         helper(['form']);
         echo view('create_post');
     }
 
     public function save()
     {
+        // Redirect logged-in users away from save (registration) action
+        if (session()->get('isLoggedIn')) {
+            return redirect()->to(base_url('post/home'));
+        }
+
         helper(['form']);
 
         $rules = [
@@ -78,6 +88,11 @@ class Post extends BaseController
 
     public function login()
     {
+        // Redirect logged-in users away from login page
+        if (session()->get('isLoggedIn')) {
+            return redirect()->to(base_url('post/home'));
+        }
+
         helper(['form']);
         echo view('login');
     }
